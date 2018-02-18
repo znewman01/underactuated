@@ -50,3 +50,6 @@ add_pytest(simple_discrete_time_system_simulation.py)
 
 add_pytest(double_integrator_value_iteration.py)
 add_pytest(pendulum_value_iteration.py)
+
+# Test disabled because it takes @ 100 seconds to run on my P51.
+# add_pytest(pendulum_linear_programming_approximate_dynamic_programming.py)
