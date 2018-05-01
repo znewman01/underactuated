@@ -345,6 +345,7 @@
   \newcommand{\bJ}{{\bf J}}
   \newcommand{\bK}{{\bf K}}
   \newcommand{\bM}{{\bf M}}
+  \newcommand{\bP}{{\bf P}}
   \newcommand{\bQ}{{\bf Q}}
   \newcommand{\bR}{{\bf R}}
   \newcommand{\bT}{{\bf T}}
@@ -366,6 +367,7 @@
   \newcommand{\sgn}{\operatorname{\textrm{sgn}}}
   \newcommand{\trace}{\operatorname{\textrm{tr}}}
   \newcommand{\sos}{\text{ is SOS}}
+  \DeclareMathOperator{\Tr}{Tr}
   \]
 </div>
 
@@ -4550,6 +4552,44 @@ where this additional input $\bw$ is the (vector) output of some random process.
     </section>
 
   </section> <!-- end finite horizon -->
+
+  <section
+      data-type="sect1"><h1>LQR as an Linear Matrix Inequality</h1>
+
+    <p>The numerical solution of the LQR problems presented so far made use of
+    special purpose algorithms designed to solve the Riccati equation. These are
+    the best tools to use for the standard formulation.  But there is also an
+    approach to solving the LQR problem via convex optimization (using linear
+    matrix inequalities / semi-definite programming).  This approach is
+    potentially numerically worse in the nominal case, but is more general.</p>
+
+    <p>Knowing that optimal solution takes the form, $\bu = -\bK \bx$, we can
+    write the LQR problem as \begin{align*} \forall x(0), \min_\bK J =&
+      \int_0^\infty \bx^T \left[ \bQ +
+      \bK^T
+    \bR \bK \right] \bx  dt, \\ \text{subject to }& \dot\bx = \bA \bx + \bB \bu.
+      \end{align*}  Now
+      we
+      will use an important
+      (and
+      common) trick
+    using the <a
+    href="https://en.wikipedia.org/wiki/Trace_(linear_algebra)">matrix
+    trace</a>.  Let us rewrite $$J = \int_0^\infty \Tr \left[ \bx^T \left[ \bQ +
+    \bK^T \bR \bK \right] \bx \right] dt.$$  This is trivially true -- the trace
+    of a scalar is of course the scalar.  But it enables us to use the property
+    of the trace to write: \begin{align*} J =& \int_0^\infty \Tr \left[ \left[
+    \bQ + \bK^T \bR \bK \right] \bx \bx^T \right] dt \\ =& \Tr \left[ \left[ \bQ
+    + \bK^T \bR \bK \right]  \int_0^\infty \bx \bx^T dt \right].
+      \end{align*}</p>  Define a new variable $\bP = \int_0^\infty \bx
+    \bx^T$, to get $$J = \Tr \left[ (\bQ + \bK^T \bR \bK) \bP \right].$$
+
+    <p>The generality of formulating the LQR solution as a convex optimization
+    pays off when we want to extend it.  For example, <elib>Olalla09></elib>
+    derives a "robust LQR" controller for uncertain systems with polytopic
+    uncertainty.</p>
+
+  </section>
 
 </section> <!-- ***************  end of LQR **************   -->
 
