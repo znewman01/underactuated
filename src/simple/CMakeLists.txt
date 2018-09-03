@@ -4,6 +4,11 @@ target_link_libraries(simple_continuous_time_system
     drake::drake)
 add_test(NAME simple_continuous_time_system COMMAND simple_continuous_time_system)
 
+add_executable(sinusoidal sinusoidal.cc)
+target_link_libraries(sinusoidal
+    drake::drake)
+
+
 add_pytest(continuous_time_system_simulation.py)
 add_pytest(discrete_time_system_simulation.py)
 add_pytest(stochastic_system_particles.py)
