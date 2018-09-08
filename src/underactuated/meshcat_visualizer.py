@@ -68,7 +68,7 @@ class MeshcatVisualizer(LeafSystem):
         self._DeclarePeriodicPublish(draw_timestep, 0.0)
 
         # Pose bundle (from SceneGraph) input port.
-        self._DeclareInputPort(PortDataType.kAbstractValued, 0)
+        self._DeclareInputPort(PortDataType.kAbstractValued, 0, "pose_bundle")
 
         # Set up meshcat.
         self.prefix = prefix
