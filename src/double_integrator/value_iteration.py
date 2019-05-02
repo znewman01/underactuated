@@ -23,9 +23,9 @@ class DoubleIntegrator(VectorSystem):
         xdot[0] = x[1]
         xdot[1] = u
 
-    # y(t) = x(t)
+    # y(t) = q(t)
     def DoCalcVectorOutput(self, context, u, x, y):
-        y[:] = x
+        y[:] = x[:1]
 
 
 plant = DoubleIntegrator()
